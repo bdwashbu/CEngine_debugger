@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+GET     /favicon.ico                controllers.HomeController.favicon
+GET     /js/*file                   controllers.HomeController.javascript(file: String)
+GET     /css/*file                  controllers.HomeController.css(file: String)
+GET     /getAst                     controllers.HomeController.getAst(code: String, width: Int, height: Int)
+GET     /websocket                  controllers.HomeController.websocket
+
+GET     /assets/*file               controllers.Assets.versioned(file)

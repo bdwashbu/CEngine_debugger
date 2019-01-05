@@ -1,26 +1,20 @@
-name := "c_engine_debugger"
+name := """play-scala-starter-example"""
 
-lazy val root = (project in file("."))
-  .settings(
-    name         := "c_engine_debugger",
-    organization := "org.c_engine",
-    scalaVersion := "2.11.11",
-    version      := "0.1.0-SNAPSHOT"
-  ).enablePlugins(PlayScala, LauncherJarPlugin)
+version := "1.0-SNAPSHOT"
 
-scalaSource in Compile := baseDirectory.value / "src"
-scalaSource in Test := baseDirectory.value / "tests"
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.11"
+resolvers += Resolver.sonatypeRepo("snapshots")
+
+scalaVersion := "2.12.8"
+
+crossScalaVersions := Seq("2.11.12", "2.12.7")
 
 libraryDependencies ++= Seq(
   jdbc,
   filters,
   cache,
   ws,
-  "com.github.pathikrit" %% "better-files" % "2.17.1",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0-RC1" % Test,
-  "com.github.bdwashbu" % "cengine_2.11" % "0.0.4"
+  guice,
+  "com.github.pathikrit" %% "better-files" % "2.17.1"
 )
-
-//testOptions in Test += Tests.Argument("-P")

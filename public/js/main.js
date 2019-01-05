@@ -379,27 +379,27 @@ function step() {
 
 function submitCode() {
 	
-	socket = new WebSocket("ws://localhost:81/websocket");
+	socket = new WebSocket("ws://localhost:9000/websocket");
 
-    socket.onopen = function() {
-    }
+   socket.onopen = function() {
+   }
 
-    socket.onmessage = function(msg){
-    	var data = event.data
-    	if (data.toString().startsWith("Step Response:")) {
-    		var id = parseInt(data.toString().split(":")[1]);
-    		flatten(root).forEach(function(node) {
-    			if (node.id.toString() == id.toString()) {
-    			  node.color = "#0000FF";
-    			}
-    		});
-    	} else if (data.toString().startsWith("Current Node Class:")) {
-    		var className = data.toString().split(":")[1];
-    		$('#className').text(className);
-    		$('#className').attr("href", 'https://www.cct.lsu.edu/~rguidry/eclipse-doc36/org/eclipse/cdt/internal/core/dom/parser/c/' + className + '.html');
-    		//http://help.eclipse.org/luna/index.jsp?topic=%2Forg.eclipse.cdt.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fcdt%2Fcore%2Fdom%2Fast%2FASTVisitor.html
-    	}
+   socket.onmessage = function(msg){
+    var data = event.data
+    if (data.toString().startsWith("Step Response:")) {
+        var id = parseInt(data.toString().split(":")[1]);
+        flatten(root).forEach(function(node) {
+            if (node.id.toString() == id.toString()) {
+              node.color = "#0000FF";
+            }
+        });
+    } else if (data.toString().startsWith("Current Node Class:")) {
+        var className = data.toString().split(":")[1];
+        $('#className').text(className);
+        $('#className').attr("href", 'https://www.cct.lsu.edu/~rguidry/eclipse-doc36/org/eclipse/cdt/internal/core/dom/parser/c/' + className + '.html');
+        //http://help.eclipse.org/luna/index.jsp?topic=%2Forg.eclipse.cdt.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fcdt%2Fcore%2Fdom%2Fast%2FASTVisitor.html
     }
+   }
 	
     $.getJSON("getAst",
         {
